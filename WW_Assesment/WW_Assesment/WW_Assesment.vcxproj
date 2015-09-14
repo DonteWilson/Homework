@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2B97BFAF-4CE3-498D-9EC2-4CA456A018FE}</ProjectGuid>
-    <RootNamespace>FunctionsEx1</RootNamespace>
+    <ProjectGuid>{8BE531DA-E315-41E2-8630-C7004FE24202}</ProjectGuid>
+    <RootNamespace>WW_Assesment</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,7 +118,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Functions Ex1.cpp" />
+    <ClInclude Include="WA.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WA2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
