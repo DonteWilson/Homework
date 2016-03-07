@@ -1,0 +1,6 @@
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Tutorial\Tutorial\bin\Debug\Tutorial.exe.config
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Tutorial\Tutorial\bin\Debug\Tutorial.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Tutorial\Tutorial\bin\Debug\Tutorial.pdb
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Tutorial\Tutorial\obj\Debug\Tutorial.csprojResolveAssemblyReference.cache
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Tutorial\Tutorial\obj\Debug\Tutorial.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Tutorial\Tutorial\obj\Debug\Tutorial.pdb

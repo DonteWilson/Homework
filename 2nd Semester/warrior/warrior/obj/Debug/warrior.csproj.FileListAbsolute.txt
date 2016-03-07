@@ -1,0 +1,6 @@
+c:\users\donte.wilson\documents\visual studio 2015\Projects\warrior\warrior\bin\Debug\warrior.exe.config
+c:\users\donte.wilson\documents\visual studio 2015\Projects\warrior\warrior\bin\Debug\warrior.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\warrior\warrior\bin\Debug\warrior.pdb
+c:\users\donte.wilson\documents\visual studio 2015\Projects\warrior\warrior\obj\Debug\warrior.csprojResolveAssemblyReference.cache
+c:\users\donte.wilson\documents\visual studio 2015\Projects\warrior\warrior\obj\Debug\warrior.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\warrior\warrior\obj\Debug\warrior.pdb

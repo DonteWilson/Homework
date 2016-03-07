@@ -1,0 +1,6 @@
+c:\users\donte.wilson\documents\visual studio 2015\Projects\UI\UI\bin\Debug\UI.exe.config
+c:\users\donte.wilson\documents\visual studio 2015\Projects\UI\UI\bin\Debug\UI.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\UI\UI\bin\Debug\UI.pdb
+c:\users\donte.wilson\documents\visual studio 2015\Projects\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+c:\users\donte.wilson\documents\visual studio 2015\Projects\UI\UI\obj\Debug\UI.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\UI\UI\obj\Debug\UI.pdb
