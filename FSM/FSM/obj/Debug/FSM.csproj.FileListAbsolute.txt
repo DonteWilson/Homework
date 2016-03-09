@@ -1,0 +1,6 @@
+c:\users\donte.wilson\documents\visual studio 2015\Projects\FSM\FSM\bin\Debug\FSM.exe.config
+c:\users\donte.wilson\documents\visual studio 2015\Projects\FSM\FSM\bin\Debug\FSM.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\FSM\FSM\bin\Debug\FSM.pdb
+c:\users\donte.wilson\documents\visual studio 2015\Projects\FSM\FSM\obj\Debug\FSM.csprojResolveAssemblyReference.cache
+c:\users\donte.wilson\documents\visual studio 2015\Projects\FSM\FSM\obj\Debug\FSM.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\FSM\FSM\obj\Debug\FSM.pdb
