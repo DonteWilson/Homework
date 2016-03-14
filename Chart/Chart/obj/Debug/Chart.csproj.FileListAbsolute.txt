@@ -1,0 +1,9 @@
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\bin\Debug\Chart.exe.config
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\bin\Debug\Chart.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\bin\Debug\Chart.pdb
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\obj\Debug\Chart.csprojResolveAssemblyReference.cache
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\obj\Debug\Chart.Form1.resources
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\obj\Debug\Chart.Properties.Resources.resources
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\obj\Debug\Chart.csproj.GenerateResource.Cache
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\obj\Debug\Chart.exe
+c:\users\donte.wilson\documents\visual studio 2015\Projects\Chart\Chart\obj\Debug\Chart.pdb
