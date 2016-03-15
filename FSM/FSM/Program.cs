@@ -4,84 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace f
+public enum i_STATES
 {
-    class FSM
-    {
-        class Transition
-        {
-            public Transition(Enum from, Enum to)
-            {
-
-            }
-        }
-        Enum _currentState;
-        public FSM(Enum initial)
-        {
-            _states = new List<Enum>();
-            _currentState = initial;
-        }
-        private List<Enum> _states;
-
-        public bool AddState(Enum state)
-        {
-            if (_states.Contains(state))
-            {
-                _states.Add(state);
-                return true;
-            }
-            return false;
-
-        }
-
-        public void info()
-        {
-            Console.WriteLine("Finitie State Machine is comprise of ..");
-            int count = 0;
-            foreach (Enum s in _states)
-            {
-                Console.WriteLine("State " + count.ToString() + ": " + s.ToString());
-
-                count++;
-            
-
-        }
-            //public bool Addtansition(string transition)
-            //{
-            //    Enum from = null; // the first part before - >
-            //    Enum to = null; // the second part after the ->
-            //    return true;
-            //}
-            //Dictionary<Enum, List<Transition>> TransitionTable;
-            _currentState.ToString();
-     
-        }
+    Init, // Player init state
+    Idle, // Player idle state
+    Target, // Checks to see who is being target
+    Death, // Player Death state
 }
-    //finite state machine
+namespace FSMachine
+{ 
     class Program
     {
-        enum  PlayerStates
-        {
-            init,
-            idle,
-            walk, 
-            run,
-        }
         static void Main(string[] args)
         {
-            FSM fsm = new FSM(PlayerStates.init);
-            fsm.AddState(PlayerStates.init);
-            fsm.AddState(PlayerStates.idle);
-            fsm.AddState(PlayerStates.walk);
-            fsm.AddState(PlayerStates.run);
-            fsm.AddState(PlayerStates.run);
+            FSMac<i_STATES> FSM = new FSMac<i_STATES>();
+            //Adding States
+            FSM.AddState(i_STATES.Init);
+            FSM.AddState(i_STATES.Idle);
+            FSM.AddState(i_STATES.Target);
+            FSM.AddState(i_STATES.Death);
 
-            fsm.info();
+            //Adding Transitions
+            FSM.AddT(i_STATES.Init, i_STATES.Idle);
+            FSM.AddT(i_STATES.Idle, i_STATES.Target);
+            FSM.AddT(i_STATES.Target, i_STATES.Death);
+
+            //Graps a list of units 
+            List<Unit> uList = new List<Unit>();
+
+           
+
+            FSM.info();
             Console.ReadLine();
 
         }
       }
-    }
+}
+
 
 
 
