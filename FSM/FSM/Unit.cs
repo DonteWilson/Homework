@@ -39,6 +39,17 @@ public class Unit : IStats
             m_uSpd = value;
         }
     }
+    public int Lvl
+    {
+        get
+        {
+            return m_uLvl;
+        }
+        set
+        {
+            m_uLvl = value;
+        }
+    }
     public bool Life
     {
         get

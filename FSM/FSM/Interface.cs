@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 public interface IAttack<T>
 {
     bool Combat(T u);
-    bool Alive(T u);
     
 }
 //creates a public interface for stats for Player and Enemy
@@ -18,8 +17,9 @@ public interface IStats
     int Armor { get; set; }
     int XP { get; set; }
     string Type { get; set; }
+    string Name { get; set; }
 }
-public interface IControl<T, V, W, U>
+public interface IControl<T, U,V, W>
 {
     List<Unit> Speed(T u);
     bool Victorious(bool b, U p, V e);

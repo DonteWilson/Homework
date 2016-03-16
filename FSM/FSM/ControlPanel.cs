@@ -22,6 +22,7 @@ public sealed class ControlPanel : IControl<List<Unit>, List<Player>, List<Enemy
             return _instance;
         }
     }
+    //checks to see who attacks first.
     public List<Unit> Speed(List<Unit> List)
     {
         Player listp = new Player();
@@ -44,10 +45,13 @@ public sealed class ControlPanel : IControl<List<Unit>, List<Player>, List<Enemy
 
         return sortedlist;
     }
+    //void Function for Fight
     public void Fight(bool b, List<Unit> uList, FSMac<i_STATES> FSM)
     {
         char input;
+        //Player list
         Player listp = new Player();
+        //Enemy list
         Enemy liste = new Enemy();
         Unit a = new Unit();
 
@@ -72,19 +76,48 @@ public sealed class ControlPanel : IControl<List<Unit>, List<Player>, List<Enemy
             }
         }
     }
+    //Displays the stats of a Player
     public void Objectstats(List<Unit> ulist)
     {
+        //header for Player Satts
         Console.WriteLine("\nPlayer Info");
 
         for(int i = 0; i < ulist.Count; i++)
         {
+            //keeps up to date with player stats and updates them accordingly.
             Console.WriteLine(ulist.ElementAt(i).Name + "Stats : \n");
-            Console.WriteLine();
+            Console.WriteLine("Level: " + ulist.ElementAt(i).Lvl + "Health: " + ulist.ElementAt(i).HP + "Armor: " + ulist.ElementAt(i).Armor + "Exp: " + ulist.ElementAt(i).XP);
         }
     }
-    public void Victorious(bool b, List<Player> listp, List<Enemy> liste)
+    //Checks to see if the player is victorious in battle.
+    public bool Victorious(bool b, List<Player> listp, List<Enemy> liste)
     {
-
+        int count = 0;
+        int counts = 0;
+        foreach(Player p in listp)
+        {
+            if(p.Life == false)
+            {
+                count++;
+                if(listp.Count == count)
+                {
+                    b = true;
+                }
+            }
+        }
+        //checks through each enemy in the list and checks to see if they are still alive.
+        foreach(Enemy e in liste)
+        {
+            if(e.Life == false)
+            {
+                counts++;
+                if (liste.Count == count)
+                {
+                    b = true;
+                }
+            }
+        }
+        return b;
     }
 }
 
