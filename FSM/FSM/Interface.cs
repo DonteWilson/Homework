@@ -19,7 +19,11 @@ public interface IStats
     int XP { get; set; }
     string Type { get; set; }
 }
-public interface IControl<T, V, W>
+public interface IControl<T, V, W, U>
 {
-
+    List<Unit> Speed(T u);
+    bool Victorious(bool b, U p, V e);
+    void Fight(bool b, T u, W f);
+    void Objectstats(T u);
+   
 }

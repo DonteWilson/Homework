@@ -4,19 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Enemy: Unit, IStats, IAttack<Player>
+public class Enemy: Unit, IStats
 {
     private string m_ename;
     private int m_eLvl = 1;
     private int m_ehp;
     private int m_eArmor;
-    private int m_eXP = 0;
+    private int m_eXP = 50;
     private string m_eType;
+
+    private List<Enemy> m_EP = new List<Enemy>();
+
+    public Enemy()
+    {
+
+    }
+
 
     public Enemy(string name, int hp, int Amr, string t)
     {
         m_ename = name;
-        m_eLvl = Level;
+        Level = m_eLvl;
         m_ehp = hp;
         m_eArmor = Amr;
         m_eXP = Exp;
@@ -106,6 +114,17 @@ public class Enemy: Unit, IStats, IAttack<Player>
             return false;
         }
 
+    }
+    public List<Enemy> EP
+    {
+        get
+        {
+            return m_EP;
+        }
+        set
+        {
+            m_EP = value;
+        }
     }
 }
 

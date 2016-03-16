@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //Public Player class connected to Unit, Stats, Attack
-public class Player: Unit, IStats, IAttack<Enemy>
+public class Player: Unit, IStats
 {
     private string m_name;
     private int m_Lvl = 1;
@@ -13,6 +13,13 @@ public class Player: Unit, IStats, IAttack<Enemy>
     private int m_Armor;
     private int m_XP = 0;
     private string m_Type;
+
+    private List<Player> m_Party = new List<Player>();
+
+    public Player()
+    {
+
+    }
     //Player class with stats of the player
     public Player(string name, int hp, int Amr, string t)
     {
@@ -93,22 +100,7 @@ public class Player: Unit, IStats, IAttack<Enemy>
         }
     }
     //checks to see if combat is active. Has if to check
-    public bool Combat(Enemy e)
-    {
-        if(e.hp > 0)
-        {
-            float avg = e.Amr * 0.25f;
-            e.hp -= this.Amr * (int)avg;
-            return true;
-        }
-        else
-        {
-            Console.WriteLine(e.Name + "has been defeated");
-            this.Exp += e.Exp;
-            return false;
-        }
-
-    }
+   
     //Ding Level Up
     public void Ding()
     {
@@ -119,6 +111,17 @@ public class Player: Unit, IStats, IAttack<Enemy>
             this.Exp = 0;
             this.hp += 15;
             this.Armor += 5;
+        }
+    }
+    public List<Player> Party
+    {
+        get
+        {
+            return m_Party;
+        }
+        set
+        {
+            m_Party = value;
         }
     }
 }
