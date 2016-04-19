@@ -1,11 +1,3 @@
-"""
- Example program to show using an array to back a grid on-screen.
- Sample Python/Pygame Programs
- Simpson College Computer Science
- http://programarcadegames.com/
- http://simpson.edu/computer-science/
- Explanation video: http://youtu.be/mdTeqiWyFnc
-"""
 import pygame
 from Image import *
 
@@ -26,11 +18,11 @@ def main():
 	pygame.init()
 
 	# Set the HEIGHT and WIDTH of the screen
-	WINDOW_SIZE = [255, 255]
+	WINDOW_SIZE = [500, 500]
 	screen = pygame.display.set_mode(WINDOW_SIZE)
 
 	# Set title of screen
-	pygame.display.set_caption("Astar")
+	pygame.display.set_caption("Example of Astar")
 
 	# Loop until the user clicks the close button.
 	done = False
