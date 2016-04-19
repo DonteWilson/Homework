@@ -9,9 +9,18 @@ def main():
 	# Create a 2 dimensional array. A two dimensional
 	# array is simply a list of lists.
 	searchSpace = []
-	for i in range(10):
-		for j in range(10):
-			n = Node(i, j)
+	for x in range(10):
+		for y in range(10):
+			n = Node(x, y)
+			
+			cantreach = True if (x >= 5 and x <= 6 and y >= 5 and y >= 8) else False
+			print("x =:{mx} y=: {my} | pos =: {position}".format(mx = x, my = y, position = n.pos))
+			
+			n.setWalk(cantreach)
+			searchSpace.append(n)
+			
+			
+			
 			searchSpace.append(n)
 
 	# Initialize pygame
