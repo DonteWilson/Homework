@@ -1,5 +1,7 @@
 import pygame
-from Image import *
+from Image import Algorithm
+from Image import Node
+from Image import List
 
 
 

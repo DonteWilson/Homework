@@ -1,1 +1,3 @@
-start C:\Python27\python -i %~dp0\Tester.py
+@Echo off
+C:\Python27\python.exe Tester.py
+pause

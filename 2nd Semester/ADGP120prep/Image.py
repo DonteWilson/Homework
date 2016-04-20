@@ -62,11 +62,8 @@ class Algorithm:
 		print(nList)
 	
 	def AdjList(self, Nodes):
+		print "Stuff"
 		
-		
-		
-		
-			
 class List:
 	def __init__(self):
 		self.head = None
