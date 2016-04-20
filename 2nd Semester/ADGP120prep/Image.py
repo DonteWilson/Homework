@@ -17,32 +17,33 @@ class Node:
 		self.g = None
 		self.h = None
 		
-
+	#defines draw
 	def draw(self, screen, color):
 		margin = self.margin
 		
+		#sets the color to red and else if green
 		color = (0, 255, 0) if (self.walkable) else (255,0,0)
 		
 		
-		
+		#draws to the screen
 		gfx.draw.rect(screen, color, (self.left , self.top, self.width, self.height))
 	def setWalk(self, walkable):
 		self.walkable = walkable
-	
+	#gets the f value
 	def getF(self):
 		return self.h + self.g
-		
+	#sets the h value
 	def setH(self, val):
 		self.h = val
-	
+	#sets the g value
 	def setG(self, val):
 		self.g = val
-
+#class that stores all algorithm data
 class Algorithm:
 	def __init__(self,SearchSpace,Start, Goal):
 		self.OPEN = []
 		self.CLOSED = []
-		
+	#sets class definition to find the lowest F	
 	def LowestF(self, Nodes):
 		lowestF = -1
 		LFNode = None
@@ -51,12 +52,12 @@ class Algorithm:
 				lowestF = node.f
 				LFNode = node
 		return LFNode
-	
+	#sets class defintion to start the program
 	def Run(self):
 		self.OPEN.append(Start)
 		while not self.OPEN:
 			current = self.LowestF(self.OPEN)
-	
+	#sets class definition to the list of nodes
 	def Nlist(self, Nodes):
 		nList = Nodes.sort(key = lambda n: n.f)
 		print(nList)
