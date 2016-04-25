@@ -8,7 +8,6 @@ class Display(object):
         self.piece_type = "F"
         self.cell_size = (20,20)
         self.image = self.make_background()
-        self.reset()
         self.font = pygame.font.SysFont("arial",13)
         self.rendered = {}
 
@@ -17,30 +16,14 @@ class Display(object):
         image = pygame.Surface((500,500)).convert()
         image.set_colorkey((0,0,255))
         image.fill((0,0,255),(20,20,400,240))
-        for i in range(21):
-            image.fill((224,102,255),(20+20*i,20,2,242))
-        for i in range(13):
-            image.fill((224,102,255),(20,20+20*i,400,2))
+        for x in range(21):
+            image.fill((224,102,255),(20+20*x,20,2,242))
+        for y in range(13):
+            image.fill((224,102,255),(20,20+20*y,400,2))
         return image
 
-    def reset(self,full=True):
-        """Allows both completely resetting the grid or resetting to an
-        unsolved state."""
-        if full:
-            self.mode = "START"
-            self.start_cell   = None
-            self.goal_cell    = None
-            self.barriers  = self.setup_barriers()
-            self.Solver = None
-            self.time_end = self.time_start = 0.0
-            self.solution = []
-        else:
-            self.Solver = None
-            self.mode = "BARRIER"
-
     def setup_barriers(self):
-        """Initialize the boundary borders. Borders must be two cells thick to
-        prevent knight pieces from leaving the grid."""
+        #Takes mouse position to add barriers.
         self.add_barrier = False
         self.del_barrier = False
         barriers = set()
@@ -211,4 +194,26 @@ class Display(object):
                 self.center_number(cent,str(len(self.solution)),(255,255,255),Surf)
         for cell in self.barriers:
             self.fill_cell(cell,(255,255,255),Surf)
+	
+class Node:
+	def __init__(self, x, y):
+		self.parent = None		
+		self.color = (255,255,255)
+		self.width = 20
+		self.height = 20
+		self.margin = 5
+		self.left = (self.margin + self.width) *  x + self.margin
+		self.top = (self.margin + self.height) *  y + self.margin
+		self.walkable = True
+		self.pos = (x, self.height - y)
+		self.neighbor = None
+		self.data = None
+		self.next = None
+		self.f = None
+		self.g = None
+		self.h = None
+		
+	def setWalk(self, walkable):
+		self.walkable = walkable
+		
  

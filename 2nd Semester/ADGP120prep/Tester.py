@@ -10,8 +10,8 @@ def main():
 
 	# Create a 2 dimensional array. A two dimensional
 	# array is simply a list of lists.
-	EmptyRoom = []
-	for x in range(10):
+	searchSpace = []
+	for x in range(31):
 		for y in range(10):
 			n = Node(x, y)
 			
@@ -24,7 +24,7 @@ def main():
 			n.setWalk(cantreach)
 			
 			
-			EmptyRoom.append(n)
+			searchSpace.append(n)
 			
 			
 			

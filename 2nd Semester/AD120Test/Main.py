@@ -1,6 +1,8 @@
 import sys,os
 import pygame
 import Display
+from Display import Node
+
 
 class Control(object):
     def __init__(self):
@@ -25,13 +27,30 @@ class Control(object):
 
 ###
 def main():
-    os.environ['SDL_VIDEO_CENTERED'] = '1'
-    pygame.init()
-    pygame.display.set_caption("ADGP120")
-    pygame.display.set_mode((500,500))
-    RunIt = Control()
-    RunIt.game_loop()
-    pygame.quit();sys.exit()
+
+	EmptyRoom = []
+	for x in range(21):
+		for y in range(13):
+			n = Node(x, y)
+			
+			
+			
+			cantreach = True if (x >= 4 and x <= 6 and y >= 4 and y >= 3) else False
+			print("x =:{mx} y=: {my} | pos =: {position}".format(mx = x, my = y, position = n.pos))
+			
+		
+			n.setWalk(cantreach)
+			
+			
+			EmptyRoom.append(n)
+			
+	os.environ['SDL_VIDEO_CENTERED'] = '1'
+	pygame.init()
+	pygame.display.set_caption("ADGP120")
+	pygame.display.set_mode((500,500))
+	RunIt = Control()
+	RunIt.game_loop()
+	pygame.quit();sys.exit()
 
 ####
 if __name__ == "__main__":

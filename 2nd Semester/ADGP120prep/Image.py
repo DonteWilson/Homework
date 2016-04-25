@@ -1,4 +1,5 @@
 import pygame as gfx
+import math
 class Node:
 	def __init__(self, x, y):
 		self.parent = None		
@@ -16,6 +17,25 @@ class Node:
 		self.f = None
 		self.g = None
 		self.h = None
+	
+	def Run(self):
+		i = 0			
+			for adj in current.adjacents:
+				if adj.walkable and adj not in closed:
+					if adj not in open:
+						open.append(adj)
+						yield adj
+						adj.parent = current						
+						adj.g = 10 if i < 4 else 14
+						
+					else:
+						move = 10 if i < 4 else 14
+						movecost = move + current.g
+						if movecost < adj.g: 
+							adj.parent = current						
+							adj.g = movecost
+						yield adj.parent
+				i+=1
 		
 	#defines draw
 	def draw(self, screen, color):
@@ -43,6 +63,11 @@ class Algorithm:
 	def __init__(self,SearchSpace,Start, Goal):
 		self.OPEN = []
 		self.CLOSED = []
+		self.Start = Start
+		self.Goal = Goal
+		self.SearchSpace = SearchSpace
+		self.currentNode = Start
+		print self.currentNode.pos[0],",",self.currentNode.pos[1]
 	#sets class definition to find the lowest F	
 	def LowestF(self, Nodes):
 		lowestF = -1
@@ -63,7 +88,18 @@ class Algorithm:
 		print(nList)
 	
 	def AdjList(self, Nodes):
-		print "Stuff"
+		for n in self. SearchSpace
+		
+	
+	def Mdist(self, Node1, Node2):
+		Xpos = abs(Node1.pos[0]-Node2.pos[0])
+		Ypos = abs(Node1.pos[1]-Node2.pos[1])
+		print Xpos,",",Ypos
+		return Xpos, Ypos
+	
+	
+	
+	
 		
 class List:
 	def __init__(self):
