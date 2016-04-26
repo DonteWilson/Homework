@@ -1,7 +1,6 @@
 import pygame
-from Image import Algorithm
-from Image import Node
-from Image import List
+from Image import *
+
 
 
 
@@ -10,17 +9,17 @@ def main():
 
 	# Create a 2 dimensional array. A two dimensional
 	# array is simply a list of lists.
-	i = 0
+	id = 0
 	searchSpace = []
-	for x in range(30):
+	for x in range(10):
 		for y in range(10):
-			print x,",",y, "Index", i
-			n = Node(x, y)
-			i+=1
+			print x,",",y, "Index", id
+			n = Node(x, y, id)
+			id+=1
 			
 			
 			
-			cantreach = True if (x >= 4 and x <= 6 and y >= 4 and y >= 3) else False
+			cantreach = True if (x >= 5 and x <= 8 and y >= 3 and y >= 8) else False
 			#print("x =:{mx} y=: {my} | pos =: {position}".format(mx = x, my = y, position = n.pos))
 			
 		
@@ -36,9 +35,11 @@ def main():
 			
 			
 	MD = Algorithm(searchSpace, searchSpace[0],searchSpace[5])
-	Node1 = Node (3,5)
-	Node2 = Node (5,8)
+	Node1 = Node (3,5, id)
+	Node2 = Node (5,8, id)
+	Node3 = Node (x-1,y-1,id-1)
 	MD.Mdist (Node1, Node2)
+	MD.Adj (Node3)
 
 	# Initialize pygame
 	pygame.init()

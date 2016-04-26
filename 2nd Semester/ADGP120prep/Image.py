@@ -1,8 +1,9 @@
 import pygame as gfx
 import math
 class Node:
-	def __init__(self, x, y):
-		self.parent = None		
+	def __init__(self, x, y, id):
+		self.parent = None	
+		self.id = id
 		self.color = (255,255,255)
 		self.width = 20
 		self.height = 20
@@ -17,6 +18,7 @@ class Node:
 		self.f = None
 		self.g = None
 		self.h = None
+		
 		
 	#defines draw
 	def draw(self, screen, color):
@@ -40,24 +42,34 @@ class Node:
 	def setG(self, val):
 		self.g = val
 #class that stores all algorithm data
-class Algorithm:
+class Algorithm(object):
 	def __init__(self,SearchSpace,Start, Goal):
 		self.OPEN = []
 		self.CLOSED = []
+		self.PATH = []
 		self.Start = Start
 		self.Goal = Goal
 		self.SearchSpace = SearchSpace
-		self.currentNode = Start
+		self.currentNode = self.Start
 		print self.currentNode.pos[0],",",self.currentNode.pos[1]
-	#sets class definition to find the lowest F	
-	def LowestF(self, Nodes):
-		lowestF = -1
-		LFNode = None
-		for node in Nodes:
-			if(node.f > lowestF):
-				lowestF = node.f
-				LFNode = node
-		return LFNode
+	
+	#def Reset(self):
+		#for n in self.searchSpace:
+			#node = self.searchSpace[n]
+			#node.parent = None
+			#node.g = 0
+			#node.f = 0
+			#node.h = 0
+		
+		#for n in self.searchSpace:
+			#node = self.searchSpace[n]
+			#self.Adj(node)
+			#distx = int(math.fabs(self.Goal.index[0] - node.index[0]))
+			#distx *= 10
+			#disty = int(math.fabs(self.Goal.index[1] - node.index[1]))
+			#disty *= 10
+			#node.h = distx + disty
+
 	#sets class defintion to start the program
 	def Run(self):
 		self.OPEN.append(Start)
@@ -75,6 +87,34 @@ class Algorithm:
 		Ypos = abs(Node1.pos[1]-Node2.pos[1])
 		print Xpos,",",Ypos
 		return Xpos, Ypos
+		
+	
+	def Adj(self, currentNode):
+		rows = 10
+		cols = 10
+		Left = currentNode.id - rows
+		Right = currentNode.id + rows
+		Bot = currentNode.id + 1
+		Top = currentNode.id -1
+		Down = currentNode.id + rows + 1
+		Tright = Right - 1
+		Tleft = Left - 1
+		Bright = Right + 1
+		Bleft = Left + 1
+		adjs = [Left, Right, Bot, Top, Down, Tright, Tleft, Bright, Bleft]
+		
+		if currentNode.id % rows == 0:
+			Left = 0
+			Tleft = 0
+			Bleft = 0
+		if currentNode.id % rows == 9:
+			Right = 0
+			Tright = 0
+			Bright = 0
+		print "Top: ", Top,"| Bot: ", Bot,"| Left: ", Left,"| Right", Right
+		print "TLeft: ", Tleft,"| Bleft ", Bleft,"| Tright: ", Tright, "| Bright", Bright
+			
+		
 	
 	
 	
