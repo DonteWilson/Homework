@@ -10,32 +10,13 @@ class Node:
 		self.left = (self.margin + self.width) *  x + self.margin
 		self.top = (self.margin + self.height) *  y + self.margin
 		self.walkable = True
-		self.pos = (x, self.height - y)
+		self.pos = (x,y)
 		self.neighbor = None
 		self.data = None
 		self.next = None
 		self.f = None
 		self.g = None
 		self.h = None
-	
-	def Run(self):
-		i = 0			
-			for adj in current.adjacents:
-				if adj.walkable and adj not in closed:
-					if adj not in open:
-						open.append(adj)
-						yield adj
-						adj.parent = current						
-						adj.g = 10 if i < 4 else 14
-						
-					else:
-						move = 10 if i < 4 else 14
-						movecost = move + current.g
-						if movecost < adj.g: 
-							adj.parent = current						
-							adj.g = movecost
-						yield adj.parent
-				i+=1
 		
 	#defines draw
 	def draw(self, screen, color):
@@ -87,8 +68,6 @@ class Algorithm:
 		nList = Nodes.sort(key = lambda n: n.f)
 		print(nList)
 	
-	def AdjList(self, Nodes):
-		for n in self. SearchSpace
 		
 	
 	def Mdist(self, Node1, Node2):
