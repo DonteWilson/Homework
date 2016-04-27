@@ -34,6 +34,8 @@ class Node:
 		self.walkable = walkable
 	#gets the f value
 	def getF(self):
+		if self.g == None:
+			self.g = 0
 		return self.h + self.g
 	#sets the h value
 	def setH(self, val):
@@ -79,16 +81,28 @@ class Algorithm(object):
 	def Nlist(self, Nodes):
 		nList = Nodes.sort(key = lambda n: n.f)
 		print(nList)
+		
+	#Finds Lowest F node
+	def LowestF(self, nodes):
+		lowestF = None
+		for n in nodes:
+			if lowestF == None:
+				lowestF = nList
+			
+			elif(n.getF() < lowestF.getF()):
+				lowestF = n 
+		
+		return lowestF
 	
 		
-	
+	#Finds the manhattan distance
 	def Mdist(self, Node1, Node2):
 		Xpos = abs(Node1.pos[0]-Node2.pos[0])
 		Ypos = abs(Node1.pos[1]-Node2.pos[1])
 		print Xpos,",",Ypos
 		return Xpos, Ypos
 		
-	
+	#Finds the Adjacent nodes surroundings
 	def Adj(self, currentNode):
 		rows = 10
 		cols = 10
@@ -113,6 +127,68 @@ class Algorithm(object):
 			Bright = 0
 		print "Top: ", Top,"| Bot: ", Bot,"| Left: ", Left,"| Right", Right
 		print "TLeft: ", Tleft,"| Bleft ", Bleft,"| Tright: ", Tright, "| Bright", Bright
+	
+	def H(self, node1, node2):
+		cost = 0
+		for x, nodes in  enumerate(self.SearchSpace):
+			for y, node in enumerate(nodes):
+				if self.SearchSpace[x][y] == node1:
+					n1xy = [x,y]
+				
+				if self.SearchSpace[x][y] == node2:
+					n2xy = [x,y]
+		
+		dist = [abs(n1xy[0] - n2xy[0]), abs(n1xy[1] - n2xy[1])]
+		
+		while (dist != [0,0]):
+			if dist[0] > 0:
+				cost += 10
+				dist[0] -= 1
+				
+			if dist[1] >0:
+				cost += 10
+				dist[1] -= 1
+		
+		return cost
+	
+	def G(self, node1, node2):
+		cose = 0
+		for x, nodes in enumerate(self.SearchSpace):
+			for y, node in enumerate(nodes):
+				if self.SearchSpace[x][y] == node1:
+					n1xy = [x,y]
+				
+				if self.SearchSpace[x][y] == node2:
+					n2xy = [x,y]
+					
+		dist = [abs(n1xy[0] - n2xy[0]), abs(n1xy[1] - n2xy[1])]
+		
+		if(dist[0] > 0) and (dist[1] > 0):
+			cost = 14
+		
+		else:
+			cost = 10
+		
+		return cost
+	
+	
+	def Star(self):
+		self.Start()
+		while(len(self.OPEN) > 0):
+			self.currentNode = self.LowestF(self.OPEN)
+			self.OPEN.remove(self.currentNode)
+			self.CLOSED.append(self.currentNode)
+			adj = self.Adj()
+			
+			if(self.currentNode == self.Goal) or (self.Goal in self.CLOSED):
+				return True
+			
+			for n in adj:
+				if(n not in self.CLOSED):
+					if(n not in self.OPEN):
+						n.parent = self.currentNode
+						n.setH
+						self.OPEN.append(n)
 			
 		
 	

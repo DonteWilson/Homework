@@ -9,10 +9,12 @@ def main():
 
 	# Create a 2 dimensional array. A two dimensional
 	# array is simply a list of lists.
+	rows = 10
+	cols = 10
 	id = 0
 	searchSpace = []
-	for x in range(10):
-		for y in range(10):
+	for x in range(cols):
+		for y in range(rows):
 			print x,",",y, "Index", id
 			n = Node(x, y, id)
 			id+=1
@@ -34,9 +36,9 @@ def main():
 			
 			
 			
-	MD = Algorithm(searchSpace, searchSpace[0],searchSpace[5])
-	Node1 = Node (3,5, id)
-	Node2 = Node (5,8, id)
+	MD = Algorithm(searchSpace, searchSpace[0],searchSpace[10])
+	Node1 = Node (3,5, 35)
+	Node2 = Node (5,8, 58)
 	Node3 = Node (x-1,y-1,id-1)
 	MD.Mdist (Node1, Node2)
 	MD.Adj (Node3)
