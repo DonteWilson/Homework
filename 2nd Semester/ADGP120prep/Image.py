@@ -7,6 +7,8 @@ class Node:
 		self.color = (255,255,255)
 		self.width = 20
 		self.height = 20
+		self.x = x
+		self.y = y
 		self.margin = 5
 		self.left = (self.margin + self.width) *  x + self.margin
 		self.top = (self.margin + self.height) *  y + self.margin
@@ -77,6 +79,11 @@ class Algorithm(object):
 		self.OPEN.append(Start)
 		while not self.OPEN:
 			current = self.LowestF(self.OPEN)
+	
+	def Draw(self, screen):
+		pygame.draw.rect(screen,[0,150,198,220],[(self.Start.x, self.Start.y),(self.Start.width, self.Start.height)])
+		pygame.draw.rect(screen,[0,255,255,255],[(self.Goal.x, self.Goal.y),(self.Goal.width, self.Goal.height)])
+		
 	#sets class definition to the list of nodes
 	def Nlist(self, Nodes):
 		nList = Nodes.sort(key = lambda n: n.f)
@@ -121,7 +128,7 @@ class Algorithm(object):
 			Left = 0
 			Tleft = 0
 			Bleft = 0
-		if currentNode.id % rows == 9:
+		if currentNode.id % rows == 9: 
 			Right = 0
 			Tright = 0
 			Bright = 0
