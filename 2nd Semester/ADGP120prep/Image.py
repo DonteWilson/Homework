@@ -1,6 +1,7 @@
 import pygame as gfx
-import math
-class Node:
+from pygame.locals import *
+import time
+class Node(object):
 	def __init__(self, x, y, id):
 		self.parent = None	
 		self.id = id
@@ -10,16 +11,14 @@ class Node:
 		self.x = x
 		self.y = y
 		self.margin = 5
+		self.center = (self.x + (self.width / 2), self.y + (self.height / 2))
 		self.left = (self.margin + self.width) *  x + self.margin
 		self.top = (self.margin + self.height) *  y + self.margin
 		self.walkable = True
 		self.pos = (x,y)
-		self.neighbor = None
-		self.data = None
-		self.next = None
 		self.f = None
 		self.g = None
-		self.h = None
+		self.h = 0
 		
 		
 	#defines draw
@@ -27,7 +26,7 @@ class Node:
 		margin = self.margin
 		
 		#sets the color to red and else if green
-		color = (0, 255, 0) if (self.walkable) else (255,0,0)
+		color = (255, 250, 250) if (self.walkable) else (255,0,0)
 		
 		
 		#draws to the screen
@@ -47,7 +46,7 @@ class Node:
 		self.g = val
 #class that stores all algorithm data
 class Algorithm(object):
-	def __init__(self,SearchSpace,Start, Goal):
+	def __init__(self,Start,SearchSpace, Goal, id):
 		self.OPEN = []
 		self.CLOSED = []
 		self.PATH = []
@@ -55,7 +54,7 @@ class Algorithm(object):
 		self.Goal = Goal
 		self.SearchSpace = SearchSpace
 		self.currentNode = self.Start
-		print self.currentNode.pos[0],",",self.currentNode.pos[1]
+		#print self.currentNode.pos[0],",",self.currentNode.pos[1]
 	
 	#def Reset(self):
 		#for n in self.searchSpace:
@@ -108,6 +107,21 @@ class Algorithm(object):
 		Ypos = abs(Node1.pos[1]-Node2.pos[1])
 		print Xpos,",",Ypos
 		return Xpos, Ypos
+	
+	def Start(self):
+		self.currentNode = self.start
+		
+		self.OPEN.append(self.currentNode)
+		aj = self.Adj()
+		for n in aj:
+			if(n.walkable == True):
+				n.parent = self.currentNode
+				n.setH(self.H(n, self.Goal))
+				n.setG(self.G(n, self.currentNode))
+				self.OPEN.append(n)
+		
+		self.OPEN.remove(self.currentNode)
+		self.CLOSED.append(self.currentNode)
 		
 	#Finds the Adjacent nodes surroundings
 	def Adj(self, currentNode):
@@ -159,7 +173,7 @@ class Algorithm(object):
 		return cost
 	
 	def G(self, node1, node2):
-		cose = 0
+		cost = 0
 		for x, nodes in enumerate(self.SearchSpace):
 			for y, node in enumerate(nodes):
 				if self.SearchSpace[x][y] == node1:
@@ -194,58 +208,25 @@ class Algorithm(object):
 				if(n not in self.CLOSED):
 					if(n not in self.OPEN):
 						n.parent = self.currentNode
-						n.setH
+						n.setH(self.H(n, self.Goal))
+						n.setG(self.G(n, self.currentNode))
 						self.OPEN.append(n)
+					else:
+						movecost = self.currentNode.g + self.G(self.currentNode, n)
+						if(movecost < n.g):
+							n.parent = self.currentNode
+							n.setG(self.G(self.currentNode,n))
+							self.OPEN.sort(key = lambda x : x.f)
 			
-		
+			return False
 	
+	def DrawP(self, screen, node1, node2):
+		pygame.draw.circle(screen,[255, 0, 0, 255], node1.center, 10)
+		pygame.draw.line(screen,[255, 0, 0, 255], node1.center, node2.center, 5)
 	
-	
-	
-		
-class List:
-	def __init__(self):
-		self.head = None
-	
-	def addNode(self, data):
-		curr = self.head
-		if curr is None:
-			n = Node()
-			n.data = data
-			self.head = next
-			return
+	def Path(self, screen):
+		cur = self.Goal
+		while(cur.parent != None):
+			pygame.draw.line(screen, [100, 100, 100, 255], cur.center, cur.parent.center, 5)
+			cur = cur.parent
 			
-		if curr.data > data:
-			n = Node()
-			n.data = data
-			n.next = curr
-			self.head = n
-			return
-		
-		while curr.next is not None:
-			if curr.next.data > data:
-				break
-			curr = curr.next
-		n = Node()
-		n.data = data
-		n.next = curr.next
-		curr.next = n
-		return
-		
-	def __str__(self):
-		data = []
-		curr = self.head
-		while curr is not None:
-			data.append(curr.data)
-			curr = curr.next
-		return "[%s]" %(','.join(str(i) for i in data))
-		
-	def __repr__(self):
-		return self.__str__()
-		
-	
-	
-	
-
-	
-	

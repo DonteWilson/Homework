@@ -1,5 +1,9 @@
 import pygame
+import Image
+import random
+from random import*
 from Image import *
+import time
 
 
 
@@ -36,12 +40,55 @@ def main():
 			
 			
 			
-	MD = Algorithm(searchSpace, searchSpace[0],searchSpace[10])
+	MD = Algorithm(searchSpace[0],searchSpace,searchSpace[10], id)
 	Node1 = Node (3,5, 35)
 	Node2 = Node (5,8, 58)
 	Node3 = Node (x-1,y-1,id-1)
 	MD.Mdist (Node1, Node2)
 	MD.Adj (Node3)
+	
+	Control = Algorithm(searchSpace[1][1], searchSpace, searchSpace[8][8], id)
+	
+	for r in searchSpace:
+		for n in r:
+			rand = randrange(0,5)
+			if(rand % 3 == 0) and (Control.currentNode != n) and (Control.Goal != n):
+				n.walkable = False
+			n.Draw(screen)
+			
+	Control.Draw(screen)
+	
+	if(Control.Algorithm()):
+		for n in Control.OPEN:
+			if n != Control.Goal:
+				pygame.draw.rect(screen, [0,255,0,255],[(n.x,n.y),(n.width, n.height)])
+		for n in Control.CLOSED:
+			if(n != Control.Start) and (n != Control.Goal):
+				pygame.draw.rect(screen,[0,0, 255, 255],[(n.x, n.y), (n.width, n.height)])
+		for l in Control.SearchSpace:
+			for n in l:
+				if n.parent != None:
+					pygame.Draw.line(screen,[255,0,0,255],n.center,n.parent.center, 5)
+					pygame.Draw.circle(screen,[255,0,0,255], n.center, 10, 0)
+					
+		Control.Path(screen)
+	
+	else:
+		for n in Control.OPEN:
+			if n != Control.OPEN:
+				if n != Control.Goal:
+					pygame.Draw.rect(screen,[0, 255, 0, 255],[(n.x,n.y),(n.width, n.height)])
+		
+		for n in Control.CLOSED:
+			if(n != Control.Start) and (n != Control.Goal):
+				pygame.draw.rect(screen, [0,0,255,255],[(n.x, n.y), (n.width, n.height)])
+		
+		for l in Control.SearchSpace:
+			for n in l:
+				if n.parent != None:
+					pygame.draw.line(screen, [255, 0, 0, 255], n.center, n.parent.center, 5)
+					pygame.draw.circle(screen,[255,0,0,255], n.center, 10, 0)
+			pygame.draw.line(screen,[100,100,100,255],[0, 0], size, 10)
 
 	# Initialize pygame
 	pygame.init()
