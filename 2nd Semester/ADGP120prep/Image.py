@@ -1,4 +1,4 @@
-import pygame as gfx
+import pygame
 from pygame.locals import *
 import time
 class Node(object):
@@ -8,12 +8,11 @@ class Node(object):
 		self.color = (255,255,255)
 		self.width = 20
 		self.height = 20
+		self.space = 10 
 		self.x = x
 		self.y = y
 		self.margin = 5
 		self.center = (self.x + (self.width / 2), self.y + (self.height / 2))
-		self.left = (self.margin + self.width) *  x + self.margin
-		self.top = (self.margin + self.height) *  y + self.margin
 		self.walkable = True
 		self.pos = (x,y)
 		self.f = None
@@ -30,7 +29,7 @@ class Node(object):
 		
 		
 		#draws to the screen
-		gfx.draw.rect(screen, color, (self.left , self.top, self.width, self.height))
+		pygame.draw.rect(screen, color, (self.x , self.y, self.width, self.height))
 	def setWalk(self, walkable):
 		self.walkable = walkable
 	#gets the f value
@@ -39,11 +38,15 @@ class Node(object):
 			self.g = 0
 		return self.h + self.g
 	#sets the h value
-	def setH(self, val):
-		self.h = val
+	def setH(self, value):
+		self.h = value
+		self.f = self.getF()
+		return self.h
 	#sets the g value
-	def setG(self, val):
-		self.g = val
+	def setG(self, value):
+		self.g = value
+		self.f = self.getF()
+		return self.g
 #class that stores all algorithm data
 class Algorithm(object):
 	def __init__(self,Start,SearchSpace, Goal, id):
