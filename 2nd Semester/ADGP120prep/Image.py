@@ -1,11 +1,11 @@
 import pygame
 from pygame.locals import *
 import time
+#Node class Object 
 class Node(object):
-	def __init__(self, x, y, id):
+	def __init__(self, x, y):
 		self.parent = None	
-		self.id = id
-		self.color = (255,255,255)
+		self.color = (255,187,31)
 		self.width = 20
 		self.height = 20
 		self.space = 10 
@@ -21,15 +21,13 @@ class Node(object):
 		
 		
 	#defines draw
-	def draw(self, screen, color):
-		margin = self.margin
-		
-		#sets the color to red and else if green
-		color = (255, 250, 250) if (self.walkable) else (255,0,0)
+	def Draw(self, screen):
+	#sets walkable squares to yellow and unwalkable squares to a brownish color.
+		clr = self.color if (self.walkable) else (141,103,18)
 		
 		
 		#draws to the screen
-		pygame.draw.rect(screen, color, (self.x , self.y, self.width, self.height))
+		pygame.draw.rect(screen, clr, [(self.x , self.y), (self.width, self.height)])
 	def setWalk(self, walkable):
 		self.walkable = walkable
 	#gets the f value
@@ -49,13 +47,13 @@ class Node(object):
 		return self.g
 #class that stores all algorithm data
 class Algorithm(object):
-	def __init__(self,Start,SearchSpace, Goal, id):
+	def __init__(self,Start,SearchSpace, Goal):
 		self.OPEN = []
 		self.CLOSED = []
 		self.PATH = []
-		self.Start = Start
-		self.Goal = Goal
-		self.SearchSpace = SearchSpace
+		self.start = Start
+		self.goal = Goal
+		self.ss = SearchSpace
 		self.currentNode = self.Start
 		#print self.currentNode.pos[0],",",self.currentNode.pos[1]
 	
@@ -83,8 +81,10 @@ class Algorithm(object):
 			current = self.LowestF(self.OPEN)
 	
 	def Draw(self, screen):
-		pygame.draw.rect(screen,[0,150,198,220],[(self.Start.x, self.Start.y),(self.Start.width, self.Start.height)])
-		pygame.draw.rect(screen,[0,255,255,255],[(self.Goal.x, self.Goal.y),(self.Goal.width, self.Goal.height)])
+		#Sets starting node to a light purple color
+		pygame.draw.rect(screen,[0,142,7,255],[(self.start.x, self.start.y),(self.start.width, self.start.height)])
+		#Sets goal node to a light blue color
+		pygame.draw.rect(screen,[150, 100, 255, 255],[(self.goal.x, self.goal.y),(self.goal.width, self.goal.height)])
 		
 	#sets class definition to the list of nodes
 	def Nlist(self, Nodes):
@@ -96,11 +96,12 @@ class Algorithm(object):
 		lowestF = None
 		for n in nodes:
 			if lowestF == None:
-				lowestF = nList
+				lowestF = n
 			
 			elif(n.getF() < lowestF.getF()):
 				lowestF = n 
 		
+		#returns the lowest F value
 		return lowestF
 	
 		
@@ -111,55 +112,60 @@ class Algorithm(object):
 		print Xpos,",",Ypos
 		return Xpos, Ypos
 	
-	def Start(self):
-		self.currentNode = self.start
-		
-		self.OPEN.append(self.currentNode)
-		aj = self.Adj()
-		for n in aj:
-			if(n.walkable == True):
-				n.parent = self.currentNode
-				n.setH(self.H(n, self.Goal))
-				n.setG(self.G(n, self.currentNode))
-				self.OPEN.append(n)
-		
-		self.OPEN.remove(self.currentNode)
-		self.CLOSED.append(self.currentNode)
-		
-	#Finds the Adjacent nodes surroundings
-	def Adj(self, currentNode):
-		rows = 10
-		cols = 10
-		Left = currentNode.id - rows
-		Right = currentNode.id + rows
-		Bot = currentNode.id + 1
-		Top = currentNode.id -1
-		Down = currentNode.id + rows + 1
-		Tright = Right - 1
-		Tleft = Left - 1
-		Bright = Right + 1
-		Bleft = Left + 1
-		adjs = [Left, Right, Bot, Top, Down, Tright, Tleft, Bright, Bleft]
-		
-		if currentNode.id % rows == 0:
-			Left = 0
-			Tleft = 0
-			Bleft = 0
-		if currentNode.id % rows == 9: 
-			Right = 0
-			Tright = 0
-			Bright = 0
-		print "Top: ", Top,"| Bot: ", Bot,"| Left: ", Left,"| Right", Right
-		print "TLeft: ", Tleft,"| Bleft ", Bleft,"| Tright: ", Tright, "| Bright", Bright
 	
+	#Finds the Adjacent nodes surroundings
+	def Adj(self):
+		#list of all adjacent nodes
+		adjacents = [] 
+		#search for the current node.
+		for i, nodes in enumerate(self.ss):
+			for j, node in enumerate(nodes):
+				if node == self.currentNode:
+					pos = (j, i)
+					
+		#gets all adjacent nodes 
+		for i, nodes in enumerate(self.ss):
+			if(pos[1] - 1 <= i <= pos[1] + 1):
+				for j, node in enumerate(nodes):
+				#if adjacent is walkable and not current node
+					if (pos[0] - 1 <= j <= pos[0] + 1) and (self.ss[i][j].walkable == True) and (self.ss[i][j] != self.currentNode):
+					#adds onto the adjacent list
+						adjacents.append(self.ss[i][j])
+		#returns the adjacent values.
+		return adjacents
+		#rows = 10
+		#cols = 10
+		#Left = currentNode.id - rows
+		#Right = currentNode.id + rows
+		#Bot = currentNode.id + 1
+		#Top = currentNode.id -1
+		#Down = currentNode.id + rows + 1
+		#Tright = Right - 1
+		#Tleft = Left - 1
+		#Bright = Right + 1
+		#Bleft = Left + 1
+		#adjs = [Left, Right, Bot, Top, Down, Tright, Tleft, Bright, Bleft]
+		
+		#if currentNode.id % rows == 0:
+		#	Left = 0
+		#	Tleft = 0
+		#	Bleft = 0
+		#if currentNode.id % rows == 9: 
+		#	Right = 0
+		#	Tright = 0
+		#	Bright = 0
+		#print "Top: ", Top,"| Bot: ", Bot,"| Left: ", Left,"| Right", Right
+		#print "TLeft: ", Tleft,"| Bleft ", Bleft,"| Tright: ", Tright, "| Bright", Bright
+	
+	#Calculates the H value
 	def H(self, node1, node2):
 		cost = 0
-		for x, nodes in  enumerate(self.SearchSpace):
+		for x, nodes in  enumerate(self.ss):
 			for y, node in enumerate(nodes):
-				if self.SearchSpace[x][y] == node1:
+				if self.ss[x][y] == node1:
 					n1xy = [x,y]
 				
-				if self.SearchSpace[x][y] == node2:
+				if self.ss[x][y] == node2:
 					n2xy = [x,y]
 		
 		dist = [abs(n1xy[0] - n2xy[0]), abs(n1xy[1] - n2xy[1])]
@@ -173,16 +179,18 @@ class Algorithm(object):
 				cost += 10
 				dist[1] -= 1
 		
+		#returns the cost
 		return cost
-	
+		
+	#Calculates the G Value
 	def G(self, node1, node2):
 		cost = 0
-		for x, nodes in enumerate(self.SearchSpace):
+		for x, nodes in enumerate(self.ss):
 			for y, node in enumerate(nodes):
-				if self.SearchSpace[x][y] == node1:
+				if self.ss[x][y] == node1:
 					n1xy = [x,y]
 				
-				if self.SearchSpace[x][y] == node2:
+				if self.ss[x][y] == node2:
 					n2xy = [x,y]
 					
 		dist = [abs(n1xy[0] - n2xy[0]), abs(n1xy[1] - n2xy[1])]
@@ -194,8 +202,29 @@ class Algorithm(object):
 			cost = 10
 		
 		return cost
+		
+	def Start(self):
+		#sets the current node to the starting node.
+		self.currentNode = self.start
+		#Add to the Open List
+		self.OPEN.append(self.currentNode)
+		aj = self.Adj()
+		for n in aj:
+			#If node walkable is true do this and looks at adjacent nodes
+			if(n.walkable == True):
+				#Set parent to current node
+				n.parent = self.currentNode
+				#Sets the H 
+				n.setH(self.H(n, self.goal))
+				#Sets the G
+				n.setG(self.G(n, self.currentNode))
+				self.OPEN.append(n)
+		
+		self.OPEN.remove(self.currentNode)
+		self.CLOSED.append(self.currentNode)
+		
 	
-	
+	#definition for the A star algorithm 
 	def Star(self):
 		self.Start()
 		while(len(self.OPEN) > 0):
@@ -204,32 +233,37 @@ class Algorithm(object):
 			self.CLOSED.append(self.currentNode)
 			adj = self.Adj()
 			
-			if(self.currentNode == self.Goal) or (self.Goal in self.CLOSED):
+			if(self.currentNode == self.goal) or (self.goal in self.CLOSED):
 				return True
 			
 			for n in adj:
 				if(n not in self.CLOSED):
 					if(n not in self.OPEN):
+						#sets the parent node
 						n.parent = self.currentNode
-						n.setH(self.H(n, self.Goal))
+						n.setH(self.H(n, self.goal))
 						n.setG(self.G(n, self.currentNode))
 						self.OPEN.append(n)
 					else:
 						movecost = self.currentNode.g + self.G(self.currentNode, n)
 						if(movecost < n.g):
+						#sets the parent node
 							n.parent = self.currentNode
+						#Sets the G value
 							n.setG(self.G(self.currentNode,n))
+							#sorts the list
 							self.OPEN.sort(key = lambda x : x.f)
-			
+			#If OPEN is empty return False
 			return False
 	
 	def DrawP(self, screen, node1, node2):
-		pygame.draw.circle(screen,[255, 0, 0, 255], node1.center, 10)
-		pygame.draw.line(screen,[255, 0, 0, 255], node1.center, node2.center, 5)
+		pygame.draw.circle(screen,[255, 252, 195, 157], node1.center, 10)
+		pygame.draw.line(screen,[255, 255, 177, 125], node1.center, node2.center, 5)
 	
 	def Path(self, screen):
-		cur = self.Goal
+		cur = self.goal
 		while(cur.parent != None):
-			pygame.draw.line(screen, [100, 100, 100, 255], cur.center, cur.parent.center, 5)
+			#draws line to the parent node.
+			pygame.draw.line(screen, [100, 255, 137, 0], cur.center, cur.parent.center, 5)
 			cur = cur.parent
 			
