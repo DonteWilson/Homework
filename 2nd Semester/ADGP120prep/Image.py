@@ -5,13 +5,13 @@ import time
 class Node(object):
 	def __init__(self, x, y):
 		self.parent = None	
-		self.color = (255,187,31)
+		self.color = (255,250,250)
 		self.width = 20
 		self.height = 20
-		self.space = 10 
+		self.space = 15
 		self.x = x
 		self.y = y
-		self.margin = 5
+		#self.margin = 5
 		self.center = (self.x + (self.width / 2), self.y + (self.height / 2))
 		self.walkable = True
 		self.pos = (x,y)
@@ -23,7 +23,7 @@ class Node(object):
 	#defines draw
 	def Draw(self, screen):
 	#sets walkable squares to yellow and unwalkable squares to a brownish color.
-		clr = self.color if (self.walkable) else (141,103,18)
+		clr = self.color if (self.walkable) else (255,105,180)
 		
 		
 		#draws to the screen

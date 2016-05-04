@@ -45,20 +45,20 @@ for r in range(0, 20):
 			
 			
 			
-			
+#Used to test functions			
 MD = Algorithm(searchSpace[0],searchSpace,searchSpace[19])
 Node1 = Node (3,5)
 Node2 = Node (5,8)
 #Node3 = Node (x-1,y-1)
-MD.Mdist (Node1, Node2)
+#MD.Mdist (Node1, Node2)
 #MD.Adj (Node3)
 	
 Control = Algorithm(searchSpace[1][1], searchSpace, searchSpace[18][18])
 	
 for r in searchSpace:
 		for n in r:
-			rand = randrange(0,10)
-			if(rand % 3 == 0) and (Control.currentNode != n) and (Control.goal != n):
+			rand = randrange(0,20)
+			if(rand % 5 == 0) and (Control.currentNode != n) and (Control.goal != n):
 				n.walkable = False
 			n.Draw(screen)
 			
@@ -71,7 +71,7 @@ if(Control.Star()):
 		for n in Control.CLOSED:
 			if(n != Control.start) and (n != Control.goal):
 				pygame.draw.rect(screen,[0,0, 255, 255],[(n.x, n.y), (n.width, n.height)])
-		for l in Control.SearchSpace:
+		for l in Control.ss:
 			for n in l:
 				if n.parent != None:
 					pygame.draw.line(screen,[255,0,0,255],n.center,n.parent.center, 5)
@@ -89,12 +89,12 @@ else:
 			if(n != Control.start) and (n != Control.goal):
 				pygame.draw.rect(screen, [0,0,255,255],[(n.x, n.y), (n.width, n.height)])
 		
-		for l in Control.ss:
+                for l in Control.ss:
 			for n in l:
 				if n.parent != None:
-					pygame.draw.line(screen, [255, 0, 0, 255], n.center, n.parent.center, 5)
-					pygame.draw.circle(screen,[255,0,0,255], n.center, 10, 0)
-			pygame.draw.line(screen,[100,100,100,255],[0, 0], WINDOW_SIZE, 10)
+					pygame.draw.line(screen, [255, 0, 255, 255], n.center, n.parent.center, 5)
+					pygame.draw.circle(screen,[255,0,255,255], n.center, 2, 0)
+			#pygame.draw.line(screen,[100,100,100,255],[0, 0], WINDOW_SIZE, 10)
 
 	
 # Set title of screen
