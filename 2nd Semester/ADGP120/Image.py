@@ -8,7 +8,7 @@ class Node(object):
 		self.color = (255,250,250)
 		self.width = 20
 		self.height = 20
-		self.space = 15
+		self.space = 11
 		self.x = x
 		self.y = y
 		#self.margin = 5
@@ -82,9 +82,9 @@ class Algorithm(object):
 	
 	def Draw(self, screen):
 		#Sets starting node to a light purple color
-		pygame.draw.rect(screen,[0,142,7,255],[(self.start.x, self.start.y),(self.start.width, self.start.height)])
+		pygame.draw.rect(screen,[0,255,255,0],[(self.start.x, self.start.y),(self.start.width, self.start.height)])
 		#Sets goal node to a light blue color
-		pygame.draw.rect(screen,[150, 100, 255, 255],[(self.goal.x, self.goal.y),(self.goal.width, self.goal.height)])
+		pygame.draw.rect(screen,[150, 184, 134, 11],[(self.goal.x, self.goal.y),(self.goal.width, self.goal.height)])
 		
 	#sets class definition to the list of nodes
 	def Nlist(self, Nodes):
@@ -160,6 +160,7 @@ class Algorithm(object):
 	#Calculates the H value
 	def H(self, node1, node2):
 		cost = 0
+		#Finds the current node
 		for x, nodes in  enumerate(self.ss):
 			for y, node in enumerate(nodes):
 				if self.ss[x][y] == node1:
@@ -185,6 +186,7 @@ class Algorithm(object):
 	#Calculates the G Value
 	def G(self, node1, node2):
 		cost = 0
+		#Finds the current node
 		for x, nodes in enumerate(self.ss):
 			for y, node in enumerate(nodes):
 				if self.ss[x][y] == node1:
