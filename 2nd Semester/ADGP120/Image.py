@@ -8,7 +8,7 @@ class Node(object):
 		self.color = (255,250,250)
 		self.width = 20
 		self.height = 20
-		self.space = 11
+		self.space = 15
 		self.x = x
 		self.y = y
 		#self.margin = 5
@@ -22,7 +22,7 @@ class Node(object):
 		
 	#defines draw
 	def Draw(self, screen):
-	#sets walkable squares to yellow and unwalkable squares to a brownish color.
+	#sets walkable squares to white and unwalkable squares to a light pink color.
 		clr = self.color if (self.walkable) else (255,105,180)
 		
 		
@@ -257,15 +257,15 @@ class Algorithm(object):
 							self.OPEN.sort(key = lambda x : x.f)
 			#If OPEN is empty return False
 			return False
-	
-	def DrawP(self, screen, node1, node2):
-		pygame.draw.circle(screen,[255, 252, 195, 157], node1.center, 10)
-		pygame.draw.line(screen,[255, 255, 177, 125], node1.center, node2.center, 5)
-	
+		
 	def Path(self, screen):
 		cur = self.goal
 		while(cur.parent != None):
 			#draws line to the parent node.
-			pygame.draw.line(screen, [100, 255, 137, 0], cur.center, cur.parent.center, 5)
+			pygame.draw.line(screen, [100, 100, 100, 255], cur.center, cur.parent.center, 5)
 			cur = cur.parent
+			
+	def Parent(self, screen, node1, node2):
+		pygame.draw.circle(screen,[255, 252, 195, 157], node1.center, 10)
+		pygame.draw.line(screen,[255, 255, 177, 125], node1.center, node2.center, 5)
 			
