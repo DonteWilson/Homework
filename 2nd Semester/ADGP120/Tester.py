@@ -54,12 +54,12 @@ Node2 = Node (5,8)
 #MD.Mdist (Node1, Node2)
 #MD.Adj (Node3)
 	
-Control = Algorithm(searchSpace[1][1], searchSpace, searchSpace[9][9])
+Control = Algorithm(searchSpace[1][1], searchSpace, searchSpace[8][8])
 	
 for r in searchSpace:
 		for n in r:
-			rand = randrange(0,10)
-			if(rand % 9 == 0) and (Control.currentNode != n) and (Control.goal != n):
+			rand = randrange(0,5)
+			if(rand % 3 == 0) and (Control.currentNode != n) and (Control.goal != n):
 				n.walkable = False
 			n.Draw(screen)
 			
@@ -74,7 +74,7 @@ if(Control.Star()):
 		for n in Control.CLOSED:
 			if(n != Control.start) and (n != Control.goal):
 				pygame.draw.rect(screen,[0,208, 32, 144],[(n.x, n.y), (n.width, n.height)])
-		#checks through thmalzar counterse searchspace for parent nodes.
+		#checks through the searchspace for parent nodes.
 		for l in Control.ss:
 			for n in l:
 				if n.parent != None:
@@ -99,7 +99,7 @@ else:
 				if n.parent != None:
 					pygame.draw.line(screen, [255, 0, 255, 255], n.center, n.parent.center, 5)
 					pygame.draw.circle(screen,[255,0,255,255], n.center, 2, 0)
-			#pygame.draw.line(screen,[100,100,100,255],[0, 0], size, 10)
+			pygame.draw.line(screen,[100,100,100,255],[0, 0], size, 10)
 
 	
 # Set title of screen
@@ -107,6 +107,7 @@ pygame.display.set_caption("ADGP120 A*")
 
 # Loop until the user clicks the close button.
 done = False
+started = None
 
 
 
