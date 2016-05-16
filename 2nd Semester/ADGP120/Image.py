@@ -15,6 +15,7 @@ class Node(object):
 		self.center = (self.x + (self.width / 2), self.y + (self.height / 2))
 		self.walkable = True
 		self.pos = (x,y)
+		self.parent = None
 		self.f = None
 		self.g = None
 		self.h = 0
@@ -161,13 +162,13 @@ class Algorithm(object):
 	def H(self, node1, node2):
 		cost = 0
 		#Finds the current node
-		for x, nodes in  enumerate(self.ss):
-			for y, node in enumerate(nodes):
-				if self.ss[x][y] == node1:
-					n1xy = [x,y]
+		for i, nodes in  enumerate(self.ss):
+			for j, node in enumerate(nodes):
+				if self.ss[i][j] == node1:
+					n1xy = [i,j]
 				
-				if self.ss[x][y] == node2:
-					n2xy = [x,y]
+				if self.ss[i][j] == node2:
+					n2xy = [i,j]
 		
 		dist = [abs(n1xy[0] - n2xy[0]), abs(n1xy[1] - n2xy[1])]
 		
@@ -187,13 +188,13 @@ class Algorithm(object):
 	def G(self, node1, node2):
 		cost = 0
 		#Finds the current node
-		for x, nodes in enumerate(self.ss):
-			for y, node in enumerate(nodes):
-				if self.ss[x][y] == node1:
-					n1xy = [x,y]
+		for i, nodes in enumerate(self.ss):
+			for j, node in enumerate(nodes):
+				if self.ss[i][j] == node1:
+					n1xy = [i,j]
 				
-				if self.ss[x][y] == node2:
-					n2xy = [x,y]
+				if self.ss[i][j] == node2:
+					n2xy = [i,j]
 					
 		dist = [abs(n1xy[0] - n2xy[0]), abs(n1xy[1] - n2xy[1])]
 		
@@ -225,7 +226,7 @@ class Algorithm(object):
 		self.OPEN.remove(self.currentNode)
 		self.CLOSED.append(self.currentNode)
 		
-	
+
 	#definition for the A star algorithm 
 	def Star(self):
 		self.Start()
@@ -235,8 +236,8 @@ class Algorithm(object):
 			self.CLOSED.append(self.currentNode)
 			adj = self.Adj()
 			
-			if(self.currentNode == self.goal) or (self.goal in self.CLOSED):
-				return True
+			if(self.currentNode == self.goal) or (self.goal in self.CLOSED):	# At this point we should check if(self.goal in self.open)
+				return True	# Break outer loop because we have the path
 			
 			for n in adj:
 				if(n not in self.CLOSED):
@@ -256,8 +257,9 @@ class Algorithm(object):
 							#sorts the list
 							self.OPEN.sort(key = lambda x : x.f)
 			#If OPEN is empty return False
-			return False
-		
+		return False
+			
+		# Break outer loop because there is no path
 	def Path(self, screen):
 		cur = self.goal
 		while(cur.parent != None):

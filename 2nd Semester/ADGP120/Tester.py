@@ -47,16 +47,16 @@ for r in range(0, 10):
 			
 			
 #Used to test functions			
-MD = Algorithm(searchSpace[0],searchSpace,searchSpace[9])
-Node1 = Node (3,5)
-Node2 = Node (5,8)
+MD = Algorithm(searchSpace[0],searchSpace,searchSpace[9])	####???
+Node1 = Node (3,5)	#
+Node2 = Node (5,8)	#
 #Node3 = Node (x-1,y-1)
 #MD.Mdist (Node1, Node2)
 #MD.Adj (Node3)
 	
 Control = Algorithm(searchSpace[1][1], searchSpace, searchSpace[8][8])
 	
-for r in searchSpace:
+for r in searchSpace:	# Generate unwalkable walls
 		for n in r:
 			rand = randrange(0,5)
 			if(rand % 3 == 0) and (Control.currentNode != n) and (Control.goal != n):
@@ -65,7 +65,7 @@ for r in searchSpace:
 			
 Control.Draw(screen)
 #If the goal is found.
-if(Control.Star()):
+if(Control.Star()):		#Control.Star is our loop
                 #checks for goal in the open list.
 		for n in Control.OPEN:
 			if n != Control.goal:
@@ -99,7 +99,7 @@ else:
 				if n.parent != None:
 					pygame.draw.line(screen, [255, 0, 255, 255], n.center, n.parent.center, 5)
 					pygame.draw.circle(screen,[255,0,255,255], n.center, 2, 0)
-			pygame.draw.line(screen,[100,100,100,255],[0, 0], size, 10)
+			#pygame.draw.line(screen,[100,100,100,255],[0, 0], size, 10)
 
 	
 # Set title of screen
