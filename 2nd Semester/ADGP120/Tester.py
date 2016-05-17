@@ -78,8 +78,8 @@ if(Control.Star()):		#Control.Star is our loop
 		for l in Control.ss:
 			for n in l:
 				if n.parent != None:
-					pygame.draw.line(screen,[255,0,0,255],n.center,n.parent.center, 5)
-					pygame.draw.circle(screen,[255,0,0,255], n.center, 10, 0)
+					pygame.draw.line(screen,[255,65,105,225],n.center,n.parent.center, 5)
+					pygame.draw.circle(screen,[255,65,105,225], n.center, 10, 0)
 		#Draws path to the screen			
 		Control.Path(screen)
 #If the goal is not found	

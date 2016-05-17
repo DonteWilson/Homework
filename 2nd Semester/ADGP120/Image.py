@@ -256,7 +256,7 @@ class Algorithm(object):
 							n.setG(self.G(self.currentNode,n))
 							#sorts the list
 							self.OPEN.sort(key = lambda x : x.f)
-			#If OPEN is empty return False
+		#If OPEN is empty return False
 		return False
 			
 		# Break outer loop because there is no path

@@ -29,8 +29,10 @@ Steps to A*
 
 
 =========================================================================================
-How does it work? / Errors
+How does it work? 
 
-The program has a grid that is 20 by 20 and it displays links to the parent nodes. The pink lines represent the surrounding nodes. The green represents the open nodes.
+The program has a grid that is 10 by 10 and it displays links to the parent nodes. The pink lines represent the surrounding nodes. The green represents the open nodes.
 
-I had a problem actually drawing out the path to the start node to the goal. I believe that their is a small error within my code that is causing this.
+If you reopen the program it gives you another start to goal path demonstration. It generates a random start and end position
+that will display the path on the screen to the user. The start goal is light blue and the goal is dark brownish color. There
+is a grey line that runs from the start node to the goal node.
